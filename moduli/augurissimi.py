@@ -1,7 +1,7 @@
 # dependencies
 
 import datetime
-import modules.tokens as tokens
+import moduli.tokens as tokens
 import telegram.ext
 import telegram
 

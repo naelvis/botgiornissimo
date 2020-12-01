@@ -3,9 +3,8 @@ import random
 import github
 import telegram.ext
 import telegram
-import modules.augurissimi as augurissimi
-
-import modules.tokens as tokens
+import moduli.augurissimi as augurissimi
+import moduli.tokens as tokens
 
 payload = dict()
 

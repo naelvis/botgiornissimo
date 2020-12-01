@@ -1,9 +1,9 @@
 import datetime
 import telegram.ext
 import telegram
-import modules.tokens as tokens
-import modules.smashissimo as smashissimo
-import modules.augurissimi as augurissimi
+import moduli.tokens as tokens
+import moduli.smashissimo as smashissimo
+import moduli.augurissimi as augurissimi
 
 def start(update: telegram.Update, context: telegram.ext.CallbackContext) -> None:
     chat_id = update.message.chat_id

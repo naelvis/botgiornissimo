@@ -4,7 +4,11 @@
 """
 
 import logging
-import modules
+import moduli.remote as remote
+import moduli.augurissimi as augurissimi
+import moduli.tokens as tokens
+import moduli.start as start
+import moduli.smashissimo as smashissimo
 import telegram.ext
 
 # Enable logging
@@ -14,31 +18,31 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Global variables
-REPLY = modules.remote.REPLY
-CONTINUE = modules.augurissimi.CONTINUE
+REPLY = remote.REPLY
+CONTINUE = augurissimi.CONTINUE
 
 def main():
     """Run bot."""
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = telegram.ext.Updater(modules.tokens.tokenissimo, use_context=True)
+    updater = telegram.ext.Updater(tokens.tokenissimo, use_context=True)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
 
     # One-line handlers
-    dispatcher.add_handler(telegram.ext.CommandHandler("start", modules.start.start))
-    dispatcher.add_handler(telegram.ext.CommandHandler("stop", modules.start.stop))
-    dispatcher.add_handler(telegram.ext.PollAnswerHandler(modules.start.smashissimo_quando))
+    dispatcher.add_handler(telegram.ext.CommandHandler("start", start.start))
+    dispatcher.add_handler(telegram.ext.CommandHandler("stop", start.stop))
+    dispatcher.add_handler(telegram.ext.PollAnswerHandler(smashissimo.smashissimo_quando))
 
     # Add conversation handler for remote start
-    fallback_handler = [telegram.ext.MessageHandler(telegram.ext.Filters.all, modules.augurissimi.done)]
+    fallback_handler = [telegram.ext.MessageHandler(telegram.ext.Filters.all, augurissimi.done)]
     remote_handler = telegram.ext.ConversationHandler(
-        entry_points=[telegram.ext.CommandHandler('remote', modules.remote.remote)],
+        entry_points=[telegram.ext.CommandHandler('remote', remote.remote)],
         states={
             REPLY: [
-                telegram.ext.MessageHandler(telegram.ext.Filters.all, modules.remote.remote_activation)
+                telegram.ext.MessageHandler(telegram.ext.Filters.all, remote.remote_activation)
             ],
         },
         fallbacks=fallback_handler
@@ -46,7 +50,7 @@ def main():
     dispatcher.add_handler(remote_handler)
 
     # Add conversation handler for events
-    augurissimi_handler = [telegram.ext.MessageHandler(telegram.ext.Filters.all, modules.augurissimi.augurissimi)]
+    augurissimi_handler = [telegram.ext.MessageHandler(telegram.ext.Filters.all, augurissimi.augurissimi)]
     event_handler = telegram.ext.ConversationHandler(
         entry_points=augurissimi_handler,
         states={

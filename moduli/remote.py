@@ -1,24 +1,25 @@
 import datetime
 import telegram.ext
 import telegram
-import modules.tokens as tokens
-import modules.augurissimi as augurissimi
-import modules.smashissimo as smashissimo
+import moduli.tokens as tokens
+import moduli.augurissimi as augurissimi
+import moduli.smashissimo as smashissimo
 
-REPLY = 0
-
-
+REPLY = 1
 # First of all, who's asking?
 
 def remote(update: telegram.Update, context: telegram.ext.CallbackContext) -> int:
     chat_id = update.message.chat_id
+    print(chat_id)
+    print(tokens.gatto)
 
     if (chat_id != tokens.gatto):
+        print("here")
         return 0
     else:
+        print("there")
         update.message.reply_text("Inserire un ID:")
         return REPLY
-
 
 # Ok, let's see what we can do
 
