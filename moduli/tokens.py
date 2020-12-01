@@ -8,12 +8,12 @@ with open("tokens/botgiornissimo-token", "r") as f:
 
 # meow
 with open("tokens/chat-id", "r") as f:
-    gatto = str(f.read())
+    gatto = int(f.read())
 
 # group id
 with open("tokens/chat-id", "r") as f:
-    gruppissimo = str(f.read())
+    gruppissimo = int(f.read())
 
 # bottone id
 with open("tokens/thebutton-id", "r") as f:
-    bottonissimo = str(f.read())
+    bottonissimo = int(f.read())

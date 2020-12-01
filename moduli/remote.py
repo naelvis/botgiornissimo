@@ -10,14 +10,10 @@ REPLY = 1
 
 def remote(update: telegram.Update, context: telegram.ext.CallbackContext) -> int:
     chat_id = update.message.chat_id
-    print(chat_id)
-    print(tokens.gatto)
 
     if (chat_id != tokens.gatto):
-        print("here")
         return 0
     else:
-        print("there")
         update.message.reply_text("Inserire un ID:")
         return REPLY
 
