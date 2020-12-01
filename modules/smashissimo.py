@@ -13,9 +13,7 @@ def buongiornissimo(context: telegram.ext.CallbackContext) -> None:
     """Send the pictures message."""
     job = context.job
 
-    # Debugging
-    # context.bot.send_message(job.context, text='Beep!')
-
+    # get images
     images = list(map(lambda x: x.path, github.Github(tokens.githubissimo).get_user().get_repo("pictures").get_contents("pictures")))
     urls = list(map(lambda x: "https://raw.githubusercontent.com/naelvis/botgiornissimo/master/" + x,
                     [x for x in images if not (x.endswith("Store"))]))
@@ -25,6 +23,7 @@ def buongiornissimo(context: telegram.ext.CallbackContext) -> None:
     weekday = datetime.datetime.now().weekday()
     [day, month] = [datetime.datetime.now().day, datetime.datetime.now().month]
 
+    # this looks as if it was written by a monkey
     if (weekday == 0):
         dict_subset = {key: value for key, value in image_dict.items() if (key.startswith("LU") | key.startswith("X"))}
     elif (weekday == 1):
@@ -78,7 +77,6 @@ def update_poll_results(poll, options, x):
     poll[options[x]] = poll.setdefault(options[x], 0) + 1
     return (poll)
 
-
 def smashissimo_quando(update: telegram.Update, context: telegram.ext.CallbackContext) -> None:
     """Communicates smashissimo date"""
 
@@ -90,6 +88,7 @@ def smashissimo_quando(update: telegram.Update, context: telegram.ext.CallbackCo
     chat_id = context.bot_data[poll_id]["chat_id"]
     chat_members = context.bot.get_chat_members_count(chat_id) - 1
 
+    # I hate for loops
     results = list(map(lambda x: update_poll_results(results, questions, x), selected_options))[-1]
 
     context.bot_data[poll_id]["answers"] += 1

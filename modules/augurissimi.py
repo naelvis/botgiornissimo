@@ -36,11 +36,11 @@ def auguri_bottone(context: telegram.ext.CallbackContext, iterations: int, updat
         return CONTINUE
     elif iterations == 2:
         context.bot.send_photo(chat_id,
-                               photo="https://raw.githubusercontent.com/naelvis/botgiornissimo/master/buongiornissimo/hamtaro_ctulhu.png")
+                               photo="https://raw.githubusercontent.com/naelvis/botgiornissimo/master/pictures/hamtaro_ctulhu.png")
         return CONTINUE
     else:
         context.bot.send_photo(chat_id,
-                               photo="https://raw.githubusercontent.com/naelvis/botgiornissimo/master/buongiornissimo/bottonbirthday.png")
+                               photo="https://raw.githubusercontent.com/naelvis/botgiornissimo/master/pictures/bottonbirthday.png")
         return telegram.ext.ConversationHandler.END
 
 

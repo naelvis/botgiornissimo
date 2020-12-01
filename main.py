@@ -27,13 +27,10 @@ def main():
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
 
-    # on different commands - answer in Telegram
+    # One-line handlers
     dispatcher.add_handler(telegram.ext.CommandHandler("start", modules.start.start))
     dispatcher.add_handler(telegram.ext.CommandHandler("stop", modules.start.stop))
     dispatcher.add_handler(telegram.ext.PollAnswerHandler(modules.start.smashissimo_quando))
-    # dispatcher.add_handler(CommandHandler("help", start))
-    # dispatcher.add_handler(CommandHandler("set", set_timer))
-    # dispatcher.add_handler(CommandHandler("unset", unset))
 
     # Add conversation handler for remote start
     fallback_handler = [telegram.ext.MessageHandler(telegram.ext.Filters.all, modules.augurissimi.done)]
