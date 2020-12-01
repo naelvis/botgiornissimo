@@ -1,2 +1,14 @@
-# botgiornissimo
- images for botgiornissimo e poco più
+# Botgiornissimo
+Welcome to the repository for Botgiornissimo! This is my first Telegram bot and my very first Python project.
+
+Botgiornissimo is per se a glorified alarm clock. There's a small script in the modules folder for each of its functionalities; the files are:
+* **tokens.py**, which only serves to import various tokens and ID the bot uses (no, I didn't upload the tokens on the repository);
+* **start.py**, which contains the start and stop functions for the bot;
+* **remote.py**, which contains the handler for starting the bot remotely;
+* **smashissimo.py**, which contains the alarm clock and the related poll handler;
+* **augurissimi.py**, which contains the functions executed on special events.
+
+References:
+* The official [example list](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Examples);
+* crrdvd's [amazon-bot](https://github.com/crrdvd/amazon-bot) repository.
+
