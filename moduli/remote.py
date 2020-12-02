@@ -46,7 +46,7 @@ def remote_activation(update: telegram.Update, context: telegram.ext.CallbackCon
                                          str(chat_type), str(chat_title), str(context.bot.get_chat(chat_id).first_name),
                                          str(context.bot.get_chat(chat_id).last_name), str(chat_id)))
         # weekdays and special
-        bg_time = datetime.time(hour=8, minute=0)  # Enter one hour LESS b/c reasons
+        bg_time = datetime.time(hour=6, minute=0)  # Enter one hour LESS b/c reasons
         context.job_queue.run_daily(callback=smashissimo.buongiornissimo, time=bg_time, context=chat_id, name="feriale",
                                     days=(0, 1, 2, 3, 4))
         context.job_queue.run_daily(callback=augurissimi.augurissimi, time=bg_time, context=chat_id, name="augurissimi")
