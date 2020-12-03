@@ -17,3 +17,6 @@ with open("tokens/group-id", "r") as f:
 # bottone id
 with open("tokens/thebutton-id", "r") as f:
     bottonissimo = int(f.read())
+
+with open("tokens/results-path", "r") as f:
+    pathissimo = str(f.read())

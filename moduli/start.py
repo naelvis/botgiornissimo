@@ -13,9 +13,11 @@ def start(update: telegram.Update, context: telegram.ext.CallbackContext) -> Non
     chat_type = context.bot.get_chat(chat_id).type
     if (chat_type != "private"):
         chat_title = context.bot.get_chat(chat_id).title
-        context.bot.send_message(tokens.gatto, "Chat type: " + str(chat_type) + "\nGroup members: " + str(
-            context.bot.get_chat_members_count(chat_id) - 1) + "\nGroup title: " + str(
-            chat_title) + "\nGroup ID: " + str(chat_id))
+        context.bot.send_message(tokens.gatto,
+                                 "Chat type: {0}\nGroup members: {1}\nGroup title: {2}\nGroup ID: {3}".format(
+                                     str(chat_type), str(
+                                         context.bot.get_chat_members_count(chat_id) - 1), str(
+                                         chat_title), str(chat_id)))
     else:
         chat_title = context.bot.get_chat(chat_id).username
         context.bot.send_message(tokens.gatto,

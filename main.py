@@ -9,6 +9,7 @@ import moduli.augurissimi as augurissimi
 import moduli.tokens as tokens
 import moduli.start as start
 import moduli.smashissimo as smashissimo
+import moduli.ocrissimo as ocrissimo
 import telegram.ext
 
 # Enable logging
@@ -20,6 +21,7 @@ logger = logging.getLogger(__name__)
 # Global variables
 REPLY = remote.REPLY
 CONTINUE = augurissimi.CONTINUE
+ANALYSIS = ocrissimo.ANALYSIS
 
 def main():
     """Run bot."""
@@ -35,6 +37,18 @@ def main():
     dispatcher.add_handler(telegram.ext.CommandHandler("start", start.start))
     dispatcher.add_handler(telegram.ext.CommandHandler("stop", start.stop))
     dispatcher.add_handler(telegram.ext.PollAnswerHandler(smashissimo.smashissimo_quando))
+
+    # Add conversation handler for registering match result
+    remote_handler = telegram.ext.ConversationHandler(
+        entry_points=[telegram.ext.CommandHandler('smashammo', ocrissimo.smashammo)],
+        states={
+            ANALYSIS: [
+                telegram.ext.MessageHandler(telegram.ext.Filters.document, ocrissimo.analysis)
+            ],
+        },
+        fallbacks= [telegram.ext.MessageHandler(telegram.ext.Filters.all, ocrissimo.e_allora)]
+    )
+    dispatcher.add_handler(remote_handler)
 
     # Add conversation handler for remote start
     fallback_handler = [telegram.ext.MessageHandler(telegram.ext.Filters.all, augurissimi.done)]
