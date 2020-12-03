@@ -11,7 +11,7 @@ with open("tokens/chat-id", "r") as f:
     gatto = int(f.read())
 
 # group id
-with open("tokens/chat-id", "r") as f:
+with open("tokens/group-id", "r") as f:
     gruppissimo = int(f.read())
 
 # bottone id
