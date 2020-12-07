@@ -14,7 +14,7 @@ def buongiornissimo(context: telegram.ext.CallbackContext) -> None:
 
     # get images
     images = list(map(lambda x: x.path, github.Github(tokens.githubissimo).get_user().get_repo("botgiornissimo").get_contents("pictures")))
-    print(images)
+
     urls = list(map(lambda x: "https://raw.githubusercontent.com/naelvis/botgiornissimo/master/" + x,
                     [x for x in images if not (x.endswith("Store"))]))
     names = list(map(lambda x: x[9:100], [x for x in images if not (x.endswith("Store"))]))
