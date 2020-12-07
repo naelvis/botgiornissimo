@@ -68,10 +68,13 @@ def buongiornissimo(context: telegram.ext.CallbackContext) -> None:
                                                               "message_id": smashissimo.message_id,
                                                               "chat_id": job.context,
                                                               "answers": 0,
-                                                              "results": dict()
+                                                              "results": dict(),
+                                                              "participants_id": {id:1 for id in tokens.smashatori.values()}
                                                           })
 
         context.bot_data.update(payload)
+
+        context.job_queue.run_once(callback=smashissimo_reminder, when = datetime.timedelta(1/8), context=[job.context, smashissimo.poll.id], name="reminder",)
 
 def update_poll_results(poll, options, x):
     poll[options[x]] = poll.setdefault(options[x], 0) + 1
@@ -82,6 +85,7 @@ def smashissimo_quando(update: telegram.Update, context: telegram.ext.CallbackCo
 
     answer = update.poll_answer
     poll_id = answer.poll_id
+    user_id = answer.user.id
     questions = context.bot_data[poll_id]["questions"]
     results = context.bot_data[poll_id]["results"]
     selected_options = answer.option_ids
@@ -91,7 +95,10 @@ def smashissimo_quando(update: telegram.Update, context: telegram.ext.CallbackCo
     # I hate for loops
     results = list(map(lambda x: update_poll_results(results, questions, x), selected_options))[-1]
 
-    context.bot_data[poll_id]["answers"] += 1
+    # Vote should only be counted the first time
+    context.bot_data[poll_id]["answers"] += context.bot_data[poll_id]["participants_id"][user_id]
+    if context.bot_data[poll_id]["participants_id"][user_id]:
+        context.bot_data[poll_id]["participants_id"][user_id] -= 1
 
     # Close poll after all group members voted
     if (context.bot_data[poll_id]["answers"] == chat_members):
@@ -111,3 +118,15 @@ def smashissimo_quando(update: telegram.Update, context: telegram.ext.CallbackCo
                 context.bot.send_message(chat_id,
                                          text="Smashissimo {}! Puntuali con la stanza!".format(most_voted.lower()))
         context.bot.stop_poll(chat_id, context.bot_data[poll_id]["message_id"])
+
+def smashissimo_reminder(context: telegram.ext.CallbackContext) -> None:
+    """Checks who voted and sends reminder"""
+
+    job = context.job
+    chat_id, poll_id = job.context
+    voters = context.bot_data[poll_id]["participants_id"]
+
+    have_not_voted = {id for id in voters if voters[id]}
+    if have_not_voted:
+        for id in have_not_voted:
+            context.bot.send_message(chat_id, text = "{0}, vota!".format(telegram.User.mention_html(id, "Scimmia")), parse_mode = telegram.ParseMode.HTML)

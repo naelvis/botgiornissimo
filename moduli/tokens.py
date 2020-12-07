@@ -1,3 +1,5 @@
+import csv
+
 # gitHub token
 with open("tokens/github-token", "r") as f:
     githubissimo = str(f.read())
@@ -20,3 +22,6 @@ with open("tokens/thebutton-id", "r") as f:
 
 with open("tokens/results-path", "r") as f:
     pathissimo = str(f.read())
+
+with open("tokens/ssb-mmb-id", "r") as f:
+    smashatori = {row[0]:int(row[1]) for row in csv.reader(f)}
