@@ -74,7 +74,7 @@ def buongiornissimo(context: telegram.ext.CallbackContext) -> None:
 
         context.bot_data.update(payload)
 
-        context.job_queue.run_once(callback=smashissimo_reminder, when = datetime.timedelta(1/8), context=[job.context, smashissimo.poll.id], name="reminder",)
+        context.job_queue.run_once(callback=smashissimo_reminder, when = datetime.timedelta(5/24), context=[job.context, smashissimo.poll.id], name="reminder",)
 
 def update_poll_results(poll, options, x):
     poll[options[x]] = poll.setdefault(options[x], 0) + 1
