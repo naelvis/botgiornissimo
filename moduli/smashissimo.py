@@ -1,6 +1,7 @@
 import datetime
 import random
 import github
+import telegram.utils.helpers
 import telegram.ext
 import telegram
 import moduli.augurissimi as augurissimi
@@ -53,7 +54,7 @@ def buongiornissimo(context: telegram.ext.CallbackContext) -> None:
                            photo=image,
                            caption=bg_message)
 
-    if (weekday == 3 and job.context == tokens.gruppissimo):
+    if (weekday == 2 and job.context == tokens.gruppissimo):
         alternative = ["Venerdì alle 21", "Sabato alle 21", "No", "Altro (specificare)"]
 
         smashissimo = context.bot.send_poll(job.context,
@@ -129,4 +130,4 @@ def smashissimo_reminder(context: telegram.ext.CallbackContext) -> None:
     have_not_voted = {id for id in voters if voters[id]}
     if have_not_voted:
         for id in have_not_voted:
-            context.bot.send_message(chat_id, text = "{0}, vota!".format(telegram.User.mention_html(id, "Scimmia")), parse_mode = telegram.ParseMode.HTML)
+            context.bot.send_message(chat_id, text = "{0}, vota!".format(telegram.utils.helpers.mention_html(id, "Scimmia")), parse_mode = telegram.ParseMode.HTML)

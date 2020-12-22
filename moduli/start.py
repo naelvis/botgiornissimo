@@ -27,7 +27,7 @@ def start(update: telegram.Update, context: telegram.ext.CallbackContext) -> Non
 
     bg_time = datetime.time(hour=6)  # Enter one hour LESS b/c reasons
     context.job_queue.run_daily(callback=smashissimo.buongiornissimo, time=bg_time, context=chat_id, name="feriale",
-                                days=(0, 1, 2, 3, 4))
+                                days=(2))
     context.job_queue.run_daily(callback=augurissimi.augurissimi, time=bg_time, context=chat_id, name="augurissimi")
 
     bg_time_weekend = datetime.time(hour=8)  # Enter one hour LESS b/c reasons
