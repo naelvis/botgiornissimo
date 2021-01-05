@@ -9,6 +9,8 @@ Botgiornissimo is per se a glorified alarm clock with a few extra perks - we use
 * **augurissimi.py**, which contains the functions executed on special events;
 * **ocrissimo.py**, which integrates an R script to detect usernames and points in the results screen of SSBU.
 
+Read more [here](https://naelvis.github.io/refactored-happiness/posts/botgiornissimo-v-1-0/).
+
 References:
 * The official [example list](https://github.com/python-telegram-bot/python-telegram-bot/wiki/Examples);
 * crrdvd's [amazon-bot](https://github.com/crrdvd/amazon-bot) repository;
