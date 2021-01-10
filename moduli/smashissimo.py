@@ -58,7 +58,7 @@ def buongiornissimo(context: telegram.ext.CallbackContext) -> None:
         alternative = ["Venerdì alle 21", "Sabato alle 21", "No", "Altro (specificare)"]
 
         smashissimo = context.bot.send_poll(job.context,
-                                            question="Smashissimo questa settimana?",
+                                            question="Smashissimo questa settimana? O kartissimo?",
                                             options=alternative,
                                             is_anonymous=False,
                                             allows_multiple_answers=True)
